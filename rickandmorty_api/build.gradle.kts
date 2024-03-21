@@ -11,7 +11,7 @@ java {
 
 dependencies {
     api(project(":entities:entity_api"))
-    implementation(project(":rickandmorty_database"))
+    implementation(project(":rickandmorty_repository"))
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.serialization.json)

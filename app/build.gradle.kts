@@ -53,7 +53,7 @@ android {
 
 dependencies {
     implementation(project(":rickandmorty_domain"))
-    implementation(project(":rickandmorty_database"))
+    implementation(project(":rickandmorty_repository"))
     implementation(project(":rickandmorty_api"))
 
     implementation(libs.androidx.core.ktx)

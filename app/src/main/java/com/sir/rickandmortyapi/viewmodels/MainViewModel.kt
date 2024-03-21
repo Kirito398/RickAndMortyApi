@@ -2,6 +2,11 @@ package com.sir.rickandmortyapi.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sir.rickandmorty.api.RickAndMortyApi
+import com.sir.rickandmorty.api.RickAndMortyRemoteImpl
+import com.sir.entity.api.retrofit.RetrofitApiFactory
+import com.sir.rickandmorty.api.utils.ErrorParser
+import com.sir.rickandmorty.repository.RickAndMortyRepositoryImpl
 import com.sir.rickandmorty.domain.RickAndMortyInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

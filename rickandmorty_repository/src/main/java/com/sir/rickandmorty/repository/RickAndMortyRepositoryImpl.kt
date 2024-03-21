@@ -1,6 +1,6 @@
-package com.sir.rickandmorty.database
+package com.sir.rickandmorty.repository
 
-import com.sir.rickandmorty.database.interfaces.RickAndMortyRemote
+import com.sir.rickandmorty.repository.interfaces.RickAndMortyRemote
 import com.sir.rickandmorty.domain.interfaces.RickAndMortyRepository
 import com.sir.rickandmorty.domain.models.CharactersWithPaginationInfo
 import com.sir.rickandmorty.domain.models.base.RequestResult

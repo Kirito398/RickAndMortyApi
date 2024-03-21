@@ -4,7 +4,7 @@ import com.sir.entity.api.retrofit.ResponseResult
 import com.sir.rickandmorty.api.models.CharactersResponse
 import com.sir.rickandmorty.api.utils.ErrorParser
 import com.sir.rickandmorty.api.utils.mapToDomainFormat
-import com.sir.rickandmorty.database.interfaces.RickAndMortyRemote
+import com.sir.rickandmorty.repository.interfaces.RickAndMortyRemote
 import com.sir.rickandmorty.domain.models.CharactersWithPaginationInfo
 import com.sir.rickandmorty.domain.models.base.RequestResult
 import com.sir.rickandmorty.domain.models.type.Failure
@@ -16,8 +16,7 @@ class RickAndMortyRemoteImpl(
     private val errorParser: ErrorParser,
 ) : RickAndMortyRemote {
     override fun getCharacters(page: Int?): Flow<RequestResult<CharactersWithPaginationInfo>> {
-        return api.getAll(page = page)
-            .runFlow()
+        return api.getAll(page = page).runFlow()
             .mapToRequestResult(CharactersResponse::mapToDomainFormat)
     }
 

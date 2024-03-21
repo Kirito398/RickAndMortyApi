@@ -1,4 +1,4 @@
-package com.sir.rickandmorty.database.interfaces
+package com.sir.rickandmorty.repository.interfaces
 
 import com.sir.rickandmorty.domain.models.CharactersWithPaginationInfo
 import com.sir.rickandmorty.domain.models.base.RequestResult
