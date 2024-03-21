@@ -1,4 +1,4 @@
-package com.sir.rickandmorty.api.retrofit
+package com.sir.entity.api.retrofit
 
 import java.lang.Exception
 

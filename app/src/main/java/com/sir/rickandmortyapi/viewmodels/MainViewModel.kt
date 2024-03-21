@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sir.rickandmorty.api.RickAndMortyApi
 import com.sir.rickandmorty.api.RickAndMortyRemoteImpl
-import com.sir.rickandmorty.api.retrofit.RetrofitApiFactory
+import com.sir.entity.api.retrofit.RetrofitApiFactory
 import com.sir.rickandmorty.api.utils.ErrorParser
 import com.sir.rickandmorty.database.RickAndMortyRepositoryImpl
 import com.sir.rickandmorty.domain.RickAndMortyInteractor

@@ -1,7 +1,7 @@
 package com.sir.rickandmorty.api
 
+import com.sir.entity.api.retrofit.ResponseResult
 import com.sir.rickandmorty.api.models.CharactersResponse
-import com.sir.rickandmorty.api.retrofit.ResponseResult
 import com.sir.rickandmorty.api.utils.ErrorParser
 import com.sir.rickandmorty.api.utils.mapToDomainFormat
 import com.sir.rickandmorty.database.interfaces.RickAndMortyRemote

@@ -1,9 +1,7 @@
-package com.sir.rickandmorty.api.retrofit
-
-import com.sir.rickandmorty.api.retrofit.HttpResponse as HttpResponseInterface
+package com.sir.entity.api.retrofit
 
 sealed class ResponseResult<out R> {
-    sealed class Success<R> : ResponseResult<R>(), HttpResponseInterface {
+    sealed class Success<R> : ResponseResult<R>(), HttpResponse {
         data class Empty(
             override val statusCode: Int,
             override val statusMessage: String?,

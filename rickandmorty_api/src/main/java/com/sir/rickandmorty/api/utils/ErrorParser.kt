@@ -1,6 +1,6 @@
 package com.sir.rickandmorty.api.utils
 
-import com.sir.rickandmorty.api.retrofit.HttpResponse
+import com.sir.entity.api.retrofit.HttpResponse
 import com.sir.rickandmorty.domain.models.type.Failure
 
 class ErrorParser {
