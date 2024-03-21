@@ -12,7 +12,7 @@ java {
 dependencies {
     implementation(project(":rickandmorty_database"))
 
-    implementation(libs.retrofit2.main)
+    api(libs.retrofit2.main)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit2.converter.json)
