@@ -4,7 +4,7 @@ import com.sir.entity.api.retrofit.RetrofitApiFactory
 import com.sir.rickandmorty.api.RickAndMortyApi
 import com.sir.rickandmorty.api.RickAndMortyRemoteImpl
 import com.sir.rickandmorty.api.utils.ErrorParser
-import com.sir.rickandmorty.database.interfaces.RickAndMortyRemote
+import com.sir.rickandmorty.repository.interfaces.RickAndMortyRemote
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

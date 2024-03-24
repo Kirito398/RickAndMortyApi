@@ -4,20 +4,21 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import com.sir.rickandmorty.cache.room.entities.CharacterEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CharacterDao {
     @Query("SELECT * FROM characters")
-    suspend fun getAll(): Flow<List<CharacterDao>>
+    suspend fun getAll(): List<CharacterEntity>
 
     @Query("SELECT * FROM characters")
-    fun observeAll(): Flow<List<CharacterDao>>
+    fun observeAll(): Flow<List<CharacterEntity>>
     @Insert
-    suspend fun insert(list: List<CharacterDao>)
+    suspend fun insert(list: List<CharacterEntity>)
 
     @Delete
-    suspend fun delete(list: List<CharacterDao>)
+    suspend fun delete(list: List<CharacterEntity>)
 
     @Query("DELETE FROM characters")
     suspend fun clean()

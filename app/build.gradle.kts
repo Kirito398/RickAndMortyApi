@@ -20,6 +20,10 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        //buildConfigField("String", "NEWS_API_KEY", "TEST")
+        buildConfigField("String", "BASE_URL", "\"https://rickandmortyapi.com/api/\"")
+        //buildConfigField("String", "IS_DEBUG", "https://rickandmortyapi.com/api/")
     }
 
     buildTypes {
@@ -39,10 +43,11 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
     packaging {
         resources {

@@ -38,7 +38,9 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.gson)
 
     implementation(libs.androidx.room.main)
+    implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 }
