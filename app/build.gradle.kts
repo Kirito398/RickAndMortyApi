@@ -55,6 +55,7 @@ dependencies {
     implementation(project(":rickandmorty_domain"))
     implementation(project(":rickandmorty_repository"))
     implementation(project(":rickandmorty_api"))
+    implementation(project(":rickandmorty_cache"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
