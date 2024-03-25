@@ -6,9 +6,9 @@ import com.sir.rickandmorty.api.utils.ErrorParser
 import com.sir.rickandmorty.api.utils.mapToDomainFormat
 import com.sir.rickandmorty.repository.interfaces.RickAndMortyRemote
 import com.sir.rickandmorty.domain.models.CharactersWithPaginationInfo
-import com.sir.rickandmorty.domain.models.base.RequestResponse
-import com.sir.rickandmorty.domain.models.base.wrapToRequestResult
 import com.sir.rickandmorty.domain.models.type.Failure
+import com.sir.rickandmorty.repository.models.RequestResponse
+import com.sir.rickandmorty.repository.models.wrapToRequestResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -18,18 +18,18 @@ class RickAndMortyRemoteImpl(
 ) : RickAndMortyRemote {
     override fun getCharacters(page: Int?): Flow<RequestResponse<CharactersWithPaginationInfo>> {
         return api.getAll(page = page).runFlow()
-            .mapToRequestResult(CharactersResponse::mapToDomainFormat)
+            .mapToRequestResponse(CharactersResponse::mapToDomainFormat)
     }
 
-    private fun <R, T> Flow<ResponseResult<R>>.mapToRequestResult(
+    private fun <R, T> Flow<ResponseResult<R>>.mapToRequestResponse(
         mapToDomainFormat: R.() -> T
     ): Flow<RequestResponse<T>> {
         return this.map {
             when (it) {
-                is ResponseResult.Success.Empty -> errorParser.parse(it).wrapToRequestResult()
-                is ResponseResult.Success.HttpResponse -> it.value.mapToDomainFormat().wrapToRequestResult()
-                is ResponseResult.Failure.Error -> Failure.ThrowableError(throwable = it.error).wrapToRequestResult()
-                is ResponseResult.Failure.HttpError -> errorParser.parse(it.exception).wrapToRequestResult()
+                is ResponseResult.Success.Empty -> errorParser.parse(it).wrapToRequestResponse()
+                is ResponseResult.Success.HttpResponse -> it.value.mapToDomainFormat().wrapToRequestResponse()
+                is ResponseResult.Failure.Error -> Failure.ThrowableError(throwable = it.error).wrapToRequestResponse()
+                is ResponseResult.Failure.HttpError -> errorParser.parse(it.exception).wrapToRequestResponse()
             }
         }
     }

@@ -5,9 +5,9 @@ import com.sir.rickandmorty.cache.utils.mapToCacheModel
 import com.sir.rickandmorty.cache.utils.mapToRepositoryModel
 import com.sir.rickandmorty.domain.models.CharacterInfo
 import com.sir.rickandmorty.domain.models.CharactersWithPaginationInfo
-import com.sir.rickandmorty.domain.models.base.RequestResponse
-import com.sir.rickandmorty.domain.models.base.wrapToRequestResult
 import com.sir.rickandmorty.repository.interfaces.RickAndMortyCache
+import com.sir.rickandmorty.repository.models.RequestResponse
+import com.sir.rickandmorty.repository.models.wrapToRequestResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -22,7 +22,7 @@ class RickAndMortyCacheImpl(
                     pages = 1
                 ),
                 results = result.map { it.mapToRepositoryModel() }
-            ).wrapToRequestResult()
+            ).wrapToRequestResponse()
         }
     }
 
