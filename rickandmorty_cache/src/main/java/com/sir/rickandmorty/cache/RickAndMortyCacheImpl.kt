@@ -8,26 +8,32 @@ import com.sir.rickandmorty.domain.models.CharactersWithPaginationInfo
 import com.sir.rickandmorty.repository.interfaces.RickAndMortyCache
 import com.sir.rickandmorty.repository.models.RequestResponse
 import com.sir.rickandmorty.repository.models.wrapToRequestResponse
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class RickAndMortyCacheImpl(
     private val roomDatabase: RickAndMortyDatabase
 ) : RickAndMortyCache {
-    override fun getCharacters(): Flow<RequestResponse<CharactersWithPaginationInfo>> {
-        return roomDatabase.characterDao.observeAll().map { result ->
-            CharactersWithPaginationInfo(
-                info = CharactersWithPaginationInfo.PaginationInfo(
-                    count = result.size,
-                    pages = 1
-                ),
-                results = result.map { it.mapToRepositoryModel() }
-            ).wrapToRequestResponse()
+    override suspend fun getCharacters(): RequestResponse<CharactersWithPaginationInfo> {
+        val result = roomDatabase.characterDao.getAll().map {
+            it.mapToRepositoryModel()
         }
+
+        return CharactersWithPaginationInfo(
+            info = CharactersWithPaginationInfo.PaginationInfo(
+                count = result.size,
+                pages = 1
+            ),
+            results = result
+        ).wrapToRequestResponse()
     }
 
     override suspend fun putCharacters(characters: List<CharacterInfo>) {
         roomDatabase.characterDao.insert(
+            characters.map { it.mapToCacheModel() }
+        )
+    }
+
+    override suspend fun updateCharacters(characters: List<CharacterInfo>) {
+        roomDatabase.characterDao.update(
             characters.map { it.mapToCacheModel() }
         )
     }

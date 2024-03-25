@@ -4,6 +4,7 @@ import com.sir.rickandmorty.domain.interfaces.RickAndMortyRepository
 import com.sir.rickandmorty.repository.RickAndMortyRepositoryImpl
 import com.sir.rickandmorty.repository.interfaces.RickAndMortyCache
 import com.sir.rickandmorty.repository.interfaces.RickAndMortyRemote
+import com.sir.rickandmorty.repository.utils.RequestResultMergeStrategy
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +23,8 @@ class RepositoryModule {
     ): RickAndMortyRepository {
         return RickAndMortyRepositoryImpl(
             remote = remote,
-            cache = cache
+            cache = cache,
+            mergeStrategy = RequestResultMergeStrategy()
         )
     }
 }
