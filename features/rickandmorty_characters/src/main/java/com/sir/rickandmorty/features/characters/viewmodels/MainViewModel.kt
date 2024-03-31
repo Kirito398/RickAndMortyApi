@@ -1,4 +1,4 @@
-package com.sir.rickandmortyapi.viewmodels
+package com.sir.rickandmorty.features.characters.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

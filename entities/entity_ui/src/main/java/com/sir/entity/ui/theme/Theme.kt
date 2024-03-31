@@ -1,4 +1,4 @@
-package com.sir.rickandmortyapi.ui.theme
+package com.sir.entity.ui.theme
 
 import android.app.Activity
 import android.os.Build

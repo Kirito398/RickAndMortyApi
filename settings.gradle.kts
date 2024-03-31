@@ -24,5 +24,9 @@ include(":app")
 include(":rickandmorty_api")
 include(":rickandmorty_repository")
 include(":rickandmorty_domain")
-include(":entities:entity_api")
 include(":rickandmorty_cache")
+
+include(":entities:entity_api")
+include(":entities:entity_ui")
+
+include(":features:rickandmorty_characters")
