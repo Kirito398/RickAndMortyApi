@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class CharactersViewModel @Inject constructor(
     private val interactor: RickAndMortyInteractor
 ) : ViewModel() {
 

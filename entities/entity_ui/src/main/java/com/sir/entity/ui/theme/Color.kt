@@ -2,10 +2,24 @@ package com.sir.entity.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val WhiteSmoke = Color(0xFFF5F5F5)
+val DarkGray = Color(0xFF272B33)
+val Gray = Color(0xFF3c3e44)
+val Orange = Color(0xFFFF9800)
+data class Colors(
+    val primaryBackground: Color,
+    val primarySecondBackground: Color,
+    val headerTextColor: Color,
+    val primaryTextColor: Color,
+    val primaryTintTextColor: Color,
+)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val lightPalette = Colors(
+    primaryBackground = DarkGray,
+    primarySecondBackground = Gray,
+    headerTextColor = WhiteSmoke,
+    primaryTextColor = WhiteSmoke,
+    primaryTintTextColor = Orange,
+)
+
+val darkPalette = lightPalette

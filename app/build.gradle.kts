@@ -21,9 +21,7 @@ android {
             useSupportLibrary = true
         }
 
-        //buildConfigField("String", "NEWS_API_KEY", "TEST")
         buildConfigField("String", "BASE_URL", "\"https://rickandmortyapi.com/api/\"")
-        //buildConfigField("String", "IS_DEBUG", "https://rickandmortyapi.com/api/")
     }
 
     buildTypes {
@@ -62,6 +60,7 @@ dependencies {
     implementation(project(":rickandmorty_api"))
     implementation(project(":rickandmorty_cache"))
     implementation(project(":entities:entity_ui"))
+    implementation(project(":features:rickandmorty_characters"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
