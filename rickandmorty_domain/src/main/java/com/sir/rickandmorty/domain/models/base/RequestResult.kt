@@ -4,5 +4,6 @@ import com.sir.rickandmorty.domain.models.type.Failure
 
 sealed class RequestResult<out R> {
     data class Success<out R>(val data: R) : RequestResult<R>()
-    data class Error(val failure: Failure) : RequestResult<Nothing>()
+    data class Error<out R>(val failure: Failure, val data: R? = null) : RequestResult<R>()
+    data class InProgress<out R>(val data: R? = null) : RequestResult<R>()
 }

@@ -13,8 +13,9 @@
             <option value="$PROJECT_DIR$/entities" />
             <option value="$PROJECT_DIR$/entities/entity_api" />
             <option value="$PROJECT_DIR$/rickandmorty_api" />
-            <option value="$PROJECT_DIR$/rickandmorty_database" />
+            <option value="$PROJECT_DIR$/rickandmorty_cache" />
             <option value="$PROJECT_DIR$/rickandmorty_domain" />
+            <option value="$PROJECT_DIR$/rickandmorty_repository" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

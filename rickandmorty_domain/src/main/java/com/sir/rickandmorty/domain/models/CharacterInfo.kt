@@ -13,7 +13,7 @@ class CharacterInfo(
     val location: CharacterLocation,
     val image: String?,
     val episodeUrls: List<String>,
-    val characterUrl: String,
+    val characterUrl: String?,
     val createdDate: Date?
 ) {
 
