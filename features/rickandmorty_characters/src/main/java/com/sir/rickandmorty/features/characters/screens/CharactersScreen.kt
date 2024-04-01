@@ -11,8 +11,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -105,7 +107,13 @@ internal fun CharacterItem(info: CharacterInfo) {
                     .weight(1f)
             ) {
                 Text(text = info.name, color = AppTheme.colors.headerTextColor, style = AppTheme.typography.titleMedium)
-                Text(text = "${info.status.name} - ${info.species}", color = AppTheme.colors.primaryTextColor)
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    CharacterStatusMarker(status = info.status)
+                    Text(text = "${info.status.name} - ${info.species}", color = AppTheme.colors.primaryTextColor)
+                }
             }
 
             Column (
@@ -127,6 +135,22 @@ internal fun CharacterItem(info: CharacterInfo) {
             }
         }
     }
+}
+
+@Composable
+private fun CharacterStatusMarker(status: CharacterInfo.CharacterStatus) {
+    val markColor = when(status) {
+        CharacterInfo.CharacterStatus.ALIVE -> AppTheme.colors.statusAlive
+        CharacterInfo.CharacterStatus.DEAD -> AppTheme.colors.statusDead
+        CharacterInfo.CharacterStatus.UNKNOWN -> AppTheme.colors.statusUnknown
+    }
+    Box(
+        modifier = Modifier
+            .padding(end = AppTheme.dimensions.defaultPadding)
+            .size(size = AppTheme.dimensions.markerSize)
+            .clip(shape = CircleShape)
+            .background(color = markColor)
+    )
 }
 
 @Composable
