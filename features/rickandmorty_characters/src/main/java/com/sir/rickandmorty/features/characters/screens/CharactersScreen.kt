@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -36,6 +35,7 @@ import com.sir.rickandmorty.features.characters.R
 import com.sir.rickandmorty.features.characters.models.CharactersEvent
 import com.sir.rickandmorty.features.characters.models.CharactersViewSubState
 import com.sir.rickandmorty.features.characters.viewmodels.CharactersViewModel
+import com.sir.rickandmorty.features.characters.views.ProgressIndicator
 
 @Composable
 fun CharactersScreen() {
@@ -68,7 +68,7 @@ internal fun CharactersScreen(
 }
 
 @Composable
-fun Characters(charactersList: List<CharacterInfo>) {
+internal fun Characters(charactersList: List<CharacterInfo>) {
     LazyColumn(
         contentPadding = PaddingValues(AppTheme.dimensions.defaultPadding),
     ) {
@@ -130,7 +130,7 @@ internal fun CharacterItem(info: CharacterInfo) {
 }
 
 @Composable
-private fun CharacterAvatar(imageUrl: String) {
+internal fun CharacterAvatar(imageUrl: String) {
     var isImageVisible by remember { mutableStateOf(true) }
     AsyncImage(
         model = imageUrl,
@@ -158,15 +158,5 @@ internal fun ErrorMessage() {
             text = stringResource(R.string.update_error),
             color = AppTheme.colors.primaryTextColor
         )
-    }
-}
-
-@Composable
-internal fun ProgressIndicator() {
-    Box(
-        modifier = Modifier.fillMaxWidth(),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator()
     }
 }
