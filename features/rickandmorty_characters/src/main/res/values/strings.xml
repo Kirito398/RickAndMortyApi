@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_error">Error during update!</string>
+    <string name="cont_desc_character_avatar">Character Avatar</string>
+    <string name="title_last_known_location">Last known location</string>
+    <string name="title_first_seen_in">First seen in</string>
+</resources>

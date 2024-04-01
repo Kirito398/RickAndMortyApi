@@ -7,9 +7,10 @@ import kotlinx.coroutines.flow.transform
 
 fun <R> Flow<RequestResponse<R>>.mapToDomain(): Flow<RequestResult<R>> {
     return transform {
-        when (it) {
+        val value = when (it) {
             is RequestResponse.Error -> RequestResult.Error(it.failure)
             is RequestResponse.Success -> RequestResult.Success(it.data)
         }
+        emit(value)
     }
 }

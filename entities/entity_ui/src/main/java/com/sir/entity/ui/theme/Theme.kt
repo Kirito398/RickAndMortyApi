@@ -2,6 +2,7 @@ package com.sir.entity.ui.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -30,7 +31,11 @@ fun RickAndMortyTheme(
     }
 
     CompositionLocalProvider(
-        LocalColorProvider provides colorScheme,
+        values = arrayOf(
+            LocalColorProvider provides colorScheme,
+            LocalTypographyProvider provides Typography,
+            LocalDimensionsProvider provides DefaultDimensions
+        ),
         content = content
     )
 }
@@ -40,8 +45,26 @@ object AppTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalColorProvider.current
+
+    val typography: Typography
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalTypographyProvider.current
+
+    val dimensions: Dimensions
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalDimensionsProvider.current
 }
 
 val LocalColorProvider = staticCompositionLocalOf<Colors> {
     error("Default color not provided")
+}
+
+val LocalTypographyProvider = staticCompositionLocalOf<Typography> {
+    error("Default typography not provided")
+}
+
+val LocalDimensionsProvider = staticCompositionLocalOf<Dimensions> {
+    error("Default dimensions not provided")
 }
