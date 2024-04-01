@@ -1,5 +1,6 @@
 package com.sir.rickandmorty.api.models
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.Date
@@ -21,17 +22,17 @@ class CharacterInfoResponse(
 
     @Serializable
     enum class CharacterStatus {
-        @SerialName("Alive") ALIVE,
-        @SerialName("Dead") DEAD,
-        @SerialName("unknown") UNKNOWN,
+        @SerializedName("Alive") ALIVE,
+        @SerializedName("Dead") DEAD,
+        @SerializedName("unknown") UNKNOWN,
     }
 
     @Serializable
     enum class CharacterGender {
-        @SerialName("Female") FEMALE,
-        @SerialName("Male") MALE,
-        @SerialName("Genderless") GENDERLESS,
-        @SerialName("unknown") UNKNOWN,
+        @SerializedName("Female") FEMALE,
+        @SerializedName("Male") MALE,
+        @SerializedName("Genderless") GENDERLESS,
+        @SerializedName("unknown") UNKNOWN,
     }
 
     data class CharacterOrigin(
