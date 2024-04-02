@@ -156,17 +156,16 @@ private fun CharacterStatusMarker(status: CharacterInfo.CharacterStatus) {
 @Composable
 internal fun CharacterAvatar(imageUrl: String) {
     var isImageVisible by remember { mutableStateOf(true) }
-    AsyncImage(
-        model = imageUrl,
-        contentDescription = stringResource(R.string.cont_desc_character_avatar),
-        onState = {
-            isImageVisible = when (it) {
-                is AsyncImagePainter.State.Error -> false
-                else -> true
-            }
-        },
-        modifier = Modifier.fillMaxHeight()
-    )
+    if (isImageVisible) {
+        AsyncImage(
+            model = imageUrl,
+            contentDescription = stringResource(R.string.cont_desc_character_avatar),
+            onError = {
+                isImageVisible = false
+            },
+            modifier = Modifier.fillMaxHeight()
+        )
+    }
 }
 
 @Composable
