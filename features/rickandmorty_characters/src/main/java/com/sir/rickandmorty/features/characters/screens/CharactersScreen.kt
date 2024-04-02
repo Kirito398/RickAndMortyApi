@@ -30,7 +30,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import coil.compose.AsyncImagePainter
 import com.sir.entity.ui.theme.AppTheme
 import com.sir.rickandmorty.domain.models.CharacterInfo
 import com.sir.rickandmorty.features.characters.R
