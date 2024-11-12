@@ -10,5 +10,9 @@ data class CharactersWithPaginationInfo(
         val pages: Int,
         //val next: String?,
         //val prev: String?
-    )
+    ) {
+        companion object {
+            val DEFAULT_PAGES_COUNT = 1
+        }
+    }
 }

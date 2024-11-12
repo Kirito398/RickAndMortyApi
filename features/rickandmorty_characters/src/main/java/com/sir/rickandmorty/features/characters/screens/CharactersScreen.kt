@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,15 +11,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -31,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.sir.entity.ui.theme.AppTheme
+import com.sir.entity.ui.view.PaginationList
 import com.sir.rickandmorty.domain.models.CharacterInfo
 import com.sir.rickandmorty.features.characters.R
 import com.sir.rickandmorty.features.characters.models.CharactersEvent
@@ -63,21 +60,23 @@ internal fun CharactersScreen(
         }
 
         if (state.charactersList.isNotEmpty()) {
-            Characters(state.charactersList)
+            Characters(state.charactersList) {
+                viewModel.obtainEvent(CharactersEvent.LoadCharacterNextPage)
+            }
         }
     }
 }
 
 @Composable
-internal fun Characters(charactersList: List<CharacterInfo>) {
-    LazyColumn(
-        contentPadding = PaddingValues(AppTheme.dimensions.defaultPadding),
-    ) {
-        items(charactersList) { characterInfo ->
-            key(characterInfo.id) {
-                CharacterItem(characterInfo)
-            }
-        }
+internal fun Characters(
+    charactersList: List<CharacterInfo>,
+    loadNewPage: () -> Unit
+) {
+    PaginationList(
+        itemList = charactersList,
+        loadNewPage = loadNewPage
+    ) { item ->
+        CharacterItem(item)
     }
 }
 
