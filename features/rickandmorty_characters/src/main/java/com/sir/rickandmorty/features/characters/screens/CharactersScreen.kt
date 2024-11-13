@@ -28,6 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.sir.entity.ui.theme.AppTheme
 import com.sir.entity.ui.view.PaginationList
+import com.sir.entity.ui.view.PullToRefresh
 import com.sir.rickandmorty.domain.models.CharacterInfo
 import com.sir.rickandmorty.features.characters.R
 import com.sir.rickandmorty.features.characters.models.CharactersEvent
@@ -60,9 +61,12 @@ internal fun CharactersScreen(
         }
 
         if (state.charactersList.isNotEmpty()) {
-            Characters(state.charactersList) {
-                viewModel.obtainEvent(CharactersEvent.LoadCharacterNextPage)
-            }
+            Characters(
+                charactersList = state.charactersList,
+                loadNewPage = { viewModel.obtainEvent(CharactersEvent.LoadCharacterNextPage) },
+                onRefresh = { viewModel.obtainEvent(CharactersEvent.UpdateCharactersList) },
+                isRefreshing = state.isLoading
+            )
         }
     }
 }
@@ -70,13 +74,20 @@ internal fun CharactersScreen(
 @Composable
 internal fun Characters(
     charactersList: List<CharacterInfo>,
-    loadNewPage: () -> Unit
+    loadNewPage: () -> Unit,
+    onRefresh: () -> Unit,
+    isRefreshing: Boolean
 ) {
-    PaginationList(
-        itemList = charactersList,
-        loadNewPage = loadNewPage
-    ) { item ->
-        CharacterItem(item)
+    PullToRefresh(
+        onRefresh = onRefresh,
+        isRefreshing = isRefreshing
+    ) {
+        PaginationList(
+            itemList = charactersList,
+            loadNewPage = loadNewPage
+        ) { item ->
+            CharacterItem(item)
+        }
     }
 }
 
@@ -136,7 +147,7 @@ internal fun CharacterItem(info: CharacterInfo) {
 }
 
 @Composable
-private fun CharacterStatusMarker(status: CharacterInfo.CharacterStatus) {
+internal fun CharacterStatusMarker(status: CharacterInfo.CharacterStatus) {
     val markColor = when(status) {
         CharacterInfo.CharacterStatus.ALIVE -> AppTheme.colors.statusAlive
         CharacterInfo.CharacterStatus.DEAD -> AppTheme.colors.statusDead
