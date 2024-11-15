@@ -7,8 +7,10 @@ import com.sir.rickandmorty.domain.models.CharactersWithPaginationInfo
 import com.sir.rickandmorty.domain.models.CharactersWithPaginationInfo.*
 import com.sir.rickandmorty.domain.models.base.RequestResult
 import com.sir.rickandmorty.features.characters.models.CharactersEvent
+import com.sir.rickandmorty.features.characters.models.CharactersFilter
 import com.sir.rickandmorty.features.characters.models.CharactersViewState
 import com.sir.rickandmorty.features.characters.models.CharactersViewSubState
+import com.sir.rickandmorty.features.characters.models.mapToDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
@@ -24,6 +26,15 @@ class CharactersViewModel @Inject constructor(
         when (event) {
             CharactersEvent.UpdateCharactersList -> obtainUpdateCharactersListEvent()
             CharactersEvent.LoadCharacterNextPage -> obtainLoadCharacterNextPageEvent()
+            is CharactersEvent.UpdateCharacterFilterName -> obtainUpdateCharacterFilterName(event.name)
+        }
+    }
+
+    private fun obtainUpdateCharacterFilterName(name: String) {
+        mutableViewState.update {
+            it.copy(
+                filter = CharactersFilter(name = name)
+            )
         }
     }
 
@@ -40,9 +51,13 @@ class CharactersViewModel @Inject constructor(
             && viewState.value.subState == CharactersViewSubState.Loading) return
 
         val loadingPage = if (isForce) 1 else viewState.value.currentPage + 1
+        val filter = viewState.value.filter
 
         viewModelScope.launch(Dispatchers.IO) {
-            interactor.getCharactersList(page = loadingPage).collect { result ->
+            interactor.getCharactersList(
+                page = loadingPage,
+                filter = filter.mapToDomain()
+            ).collect { result ->
                 when (result) {
                     is RequestResult.Error -> CharactersViewSubState.Error
                     is RequestResult.InProgress -> CharactersViewSubState.Loading

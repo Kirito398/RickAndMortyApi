@@ -9,6 +9,7 @@ data class Dimensions(
     val progressIndicatorStrokeWidth: Dp,
     val spacerSize: Dp,
     val markerSize: Dp,
+    val rounderCornerSize: Dp,
 )
 
 val DefaultDimensions = Dimensions(
@@ -17,4 +18,5 @@ val DefaultDimensions = Dimensions(
     progressIndicatorStrokeWidth = 2.dp,
     spacerSize = 8.dp,
     markerSize = 8.dp,
+    rounderCornerSize = 20.dp
 )

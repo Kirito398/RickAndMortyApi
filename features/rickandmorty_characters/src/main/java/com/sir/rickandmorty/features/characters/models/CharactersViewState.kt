@@ -13,5 +13,5 @@ data class CharactersViewState(
     val currentPage: Int = 0,
     val pageCount: Int = PaginationInfo.DEFAULT_PAGES_COUNT,
     val hasNextPage: Boolean = currentPage < pageCount,
-    val isLoading: Boolean = subState == CharactersViewSubState.Loading
+    val filter: CharactersFilter = CharactersFilter(),
 )

@@ -29,6 +29,7 @@ import coil.compose.AsyncImage
 import com.sir.entity.ui.theme.AppTheme
 import com.sir.entity.ui.view.PaginationList
 import com.sir.entity.ui.view.PullToRefresh
+import com.sir.entity.ui.view.Search
 import com.sir.rickandmorty.domain.models.CharacterInfo
 import com.sir.rickandmorty.features.characters.R
 import com.sir.rickandmorty.features.characters.models.CharactersEvent
@@ -60,12 +61,18 @@ internal fun CharactersScreen(
             ErrorMessage()
         }
 
+        Search(
+            value = state.filter.name,
+            onValueChanged = { viewModel.obtainEvent(CharactersEvent.UpdateCharacterFilterName(it)) },
+            onSearch = { viewModel.obtainEvent(CharactersEvent.UpdateCharactersList) }
+        )
+
         if (state.charactersList.isNotEmpty()) {
             Characters(
                 charactersList = state.charactersList,
                 loadNewPage = { viewModel.obtainEvent(CharactersEvent.LoadCharacterNextPage) },
                 onRefresh = { viewModel.obtainEvent(CharactersEvent.UpdateCharactersList) },
-                isRefreshing = state.isLoading
+                isRefreshing = state.subState == CharactersViewSubState.Loading
             )
         }
     }
@@ -98,7 +105,7 @@ internal fun CharacterItem(info: CharacterInfo) {
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
             .padding(AppTheme.dimensions.defaultPadding)
-            .clip(RoundedCornerShape(AppTheme.dimensions.defaultPadding))
+            .clip(RoundedCornerShape(AppTheme.dimensions.rounderCornerSize))
             .background(AppTheme.colors.primarySecondBackground)
     ) {
         info.image?.let { imageUrl ->

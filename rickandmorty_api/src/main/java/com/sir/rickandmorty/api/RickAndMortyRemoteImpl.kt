@@ -4,9 +4,11 @@ import com.sir.entity.api.retrofit.ResponseResult
 import com.sir.rickandmorty.api.models.CharactersResponse
 import com.sir.rickandmorty.api.utils.ErrorParser
 import com.sir.rickandmorty.api.utils.mapToDomainFormat
+import com.sir.rickandmorty.domain.models.CharactersFilter
 import com.sir.rickandmorty.repository.interfaces.RickAndMortyRemote
 import com.sir.rickandmorty.domain.models.CharactersWithPaginationInfo
 import com.sir.rickandmorty.domain.models.type.Failure
+import com.sir.rickandmorty.domain.utils.ifEmptyNull
 import com.sir.rickandmorty.repository.models.RequestResponse
 import com.sir.rickandmorty.repository.models.wrapToRequestResponse
 import kotlinx.coroutines.flow.Flow
@@ -16,8 +18,14 @@ class RickAndMortyRemoteImpl(
     private val api: RickAndMortyApi,
     private val errorParser: ErrorParser,
 ) : RickAndMortyRemote {
-    override fun getCharacters(page: Int?): Flow<RequestResponse<CharactersWithPaginationInfo>> {
-        return api.getAll(page = page).runFlow()
+    override fun getCharacters(
+        page: Int?,
+        filter: CharactersFilter,
+    ): Flow<RequestResponse<CharactersWithPaginationInfo>> {
+        return api.getAll(
+            page = page,
+            name = filter.name.ifEmptyNull(),
+        ).runFlow()
             .mapToRequestResponse(CharactersResponse::mapToDomainFormat)
     }
 
